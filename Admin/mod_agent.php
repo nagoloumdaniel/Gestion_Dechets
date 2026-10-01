@@ -37,7 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modage'])) {
     $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
     $id = filter_input(INPUT_POST, 'id_agent', FILTER_VALIDATE_INT);
-    $mot_de_passe = $_POST['passw'];
+    $mot_de_passe = trim($_POST['passw']);
+    if (!empty($mot_de_passe)) {
+        $mot_de_passe = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+    }
 
     if ($nom && $email && $id) {
         // Hachage du mot de passe uniquement si un nouveau est fourni

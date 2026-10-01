@@ -50,7 +50,11 @@ Projet réalisé dans le cadre d'une formation, visant à digitaliser le signale
    ```
    puis ouvrir `http://localhost:8000/index.html`.
 
-5. Créer manuellement un compte administrateur et/ou agent de collecte directement en base (tables `administrateur` et `agent_collecte`) pour accéder aux espaces authentifiés (`Admin/index.php`, `Agent_collecte/index.php`).
+5. Créer manuellement un compte administrateur directement en base (table `administrateur`) pour accéder à `Admin/index.php` — les mots de passe sont vérifiés avec `password_verify()`, donc la colonne `mot_de_passe` doit contenir un hash `password_hash()`, pas une valeur en clair :
+   ```php
+   php -r "echo password_hash('votre_mdp', PASSWORD_DEFAULT), PHP_EOL;"
+   ```
+   Les comptes agent de collecte (table `agent_collecte`) se créent ensuite depuis l'espace admin (`Admin/Agents.php`), qui hache déjà le mot de passe à la création.
 
 Aucune démonstration publique n'est disponible : le projet nécessite une base MySQL locale.
 

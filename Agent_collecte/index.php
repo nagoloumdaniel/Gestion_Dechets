@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['conne'])) {
     if ($result->num_rows == 1) {
       $agentcollecte = $result->fetch_assoc();
 
-      // Comparaison directe du mot de passe sans hash
-      if ($mot_de_passe === $agentcollecte['mot_de_passe']) {
+      if (password_verify($mot_de_passe, $agentcollecte['mot_de_passe'])) {
         $_SESSION['agent_id'] = $agentcollecte['id_agent'];
         $_SESSION['agent_name'] = $agentcollecte['nom'];
         header("Location: Taches.php");

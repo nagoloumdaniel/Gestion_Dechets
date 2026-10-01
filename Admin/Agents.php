@@ -94,7 +94,7 @@ $_SESSION['LAST_ACTIVITY'] = time();
                                 echo "<tr>";
                                 echo "<td>" . $row['id_agent'] . "</td>";
                                 echo "<td>" . $row['nom'] . "</td>";
-                                echo "<td>" . $row['mot_de_passe'] . "</td>";
+                                echo "<td>••••••••</td>";
                                 echo "<td>" . $row['email'] . "</td>";
                                 echo "<td>" . $row['statut'] . "</td>";
                                 echo "<td>
@@ -174,7 +174,7 @@ $_SESSION['LAST_ACTIVITY'] = time();
         require_once __DIR__ . "/../config/db.php";
 
         $nom = trim($_POST['nom']);
-        $mot_de_passe = trim($_POST['passw']);
+        $mot_de_passe = password_hash(trim($_POST['passw']), PASSWORD_DEFAULT);
         $email = trim($_POST['email']);
         $statut = 'libre';
 

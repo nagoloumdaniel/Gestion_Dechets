@@ -16,8 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['conne'])) {
     if ($result->num_rows == 1) {
       $admin = $result->fetch_assoc();
 
-      // Comparaison directe du mot de passe sans hash
-      if ($mot_de_passe === $admin['mot_de_passe']) {
+      if (password_verify($mot_de_passe, $admin['mot_de_passe'])) {
         $_SESSION['admin_name'] = $admin['user_name'];
         header("Location: admin.php");
         exit();
